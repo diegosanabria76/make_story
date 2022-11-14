@@ -1,0 +1,78 @@
+
+words = {
+    'adjectives': {
+        'size': 5,
+        'items': []
+    },
+    'names': {
+        'size': 2,
+        'items': []
+    },
+    'places': {
+        'size': 2,
+        'items': []
+    },
+    'verbs': {
+        'size': 1,
+        'items': []
+    },
+    'body_parts': {
+        'size': 2,
+        'items': []
+    },
+    'actions': {
+        'size': 1,
+        'items': []
+    },
+    'nouns': {
+        'size': 2,
+        'items': []
+    },
+    'count': 0
+}
+
+
+def get_inputs():
+    for word in words:
+        if word == 'count': continue
+        _word = words[word]
+        phrase = ''
+        name = word[:len(word) - 1]
+        size = _word["size"]
+        if _word['size'] > 1:
+            phrase = ' separated by a comma'
+            name = word
+        while len(_word['items']) < size:
+            _input = input(
+                f'Enter {size} {name.upper()}{phrase}. Only the first {size} will be taken => '
+            )
+            _word['items'] = _input.replace(r',\s{0,}', ',').upper().split(',')[:size]
+    words['count'] = int(input('Enter a number => '))
+
+
+def sizprint_story():
+    story = '\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n' \
+            + 'once upon a time there was a ' + words['adjectives']['items'][0] \
+            + ' couple named\n' + words['names']['items'][0] + ' and ' + words['names']['items'][1] \
+            + '. They met in a \n' + words['places']['items'][0] + ' and it was ' + words['verbs']['items'][0] \
+            + ' at first sight.\n' + 'He fell in love with her ' + words['body_parts']['items'][0] \
+            + ' and she fell in love\n' + 'with his ' + words['body_parts']['items'][1] \
+            + '. He asked if she wanted to spend\nthe rest of her ' \
+            + words['adjectives']['items'][1] + ' life with him and she said\n' + words['actions']['items'][0] \
+            + '\n\n' + 'Now for ' + words['adjectives']['items'][2] + ' or ' + words['adjectives']['items'][3] \
+            + " they're stuck\n" + 'together to live ' + words['adjectives']['items'][4] \
+            + ' even after and have ' + words['count'].__str__() + '\nkids and a ' \
+            + words['nouns']['items'][0] + ' in ' + words['places']['items'][1] \
+            + '.\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n'
+
+    print(story)
+
+
+def run():
+    get_inputs()
+    print(words)
+    sizprint_story()
+
+
+if __name__ == '__main__':
+    run()
